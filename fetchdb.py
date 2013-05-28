@@ -6,6 +6,8 @@ from fabric.api import *
 # connect to sql, make a dump and get it
 def fetchdb():
 
+		print env
+
     # expects environment variables as parameters from Jenkins
 
     private_key_path = env.private_key_path

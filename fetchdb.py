@@ -14,7 +14,7 @@ def fetchdb( private_key_path, server_host, server_account, server_password, sou
 	env.key_filename = '{0}'.format(private_key_path)
 	env.use_ssh_config = True
 	env.user 	= '{0}'.format(server_account)
-	env.password 	= '{0}'.format(server_password)
+	#env.password 	= '{0}'.format(server_password)
 	env.host_string = '{0}'.format(server_host)
 
 	print 'dump mysql to local tmp'

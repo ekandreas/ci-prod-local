@@ -21,8 +21,8 @@ def fetchdb( private_key_path, server_host, server_account, server_password, sou
 	env.host_string = '{0}'.format(server_host)
 
 	print 'dump mysql to local tmp'
-	sudo( 'mkdir -p /tmp/fetchdb' )
-	run( 'mysqldump --user={0} --password={1} {2] > /tmp/fetchdb/{2}.sql'.format(source_user, source_password, source_dbname) )
+	#sudo( 'mkdir -p /tmp/fetchdb' )
+	run( 'mysqldump --user={0} --password={1} {2] > /tmp/{2}.sql'.format(source_user, source_password, source_dbname) )
 
 	print 'get the mysql dump file to local tmp'
 	get( '/tmp/{0}.sql'.format(source_dbname), '/tmp' )

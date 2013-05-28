@@ -14,14 +14,20 @@ def fetchdb( private_key_path, server_host, server_account, server_password, sou
 	env.key_filename = '{0}'.format(private_key_path)
 	env.use_ssh_config = True
 	env.user 	= '{0}'.format(server_account)
-	#env.password 	= '{0}'.format(server_password)
+
+	if env.password:
+		env.password 	= '{0}'.format(server_password)
+
 	env.host_string = '{0}'.format(server_host)
 
 	print 'dump mysql to local tmp'
-	run( 'mkdir -p /tmp/fetchdb' )
+	run( 'sudo mkdir -p /tmp/fetchdb' )
 	run( 'mysqldump --user={0} --password={1} {2] > /tmp/fetchdb/{2}.sql'.format(source_user, source_password, source_dbname) )
 
+	print 'get the mysql dump file to local tmp'
+	get( '/tmp/{0}.sql'.format(source_dbname), '/tmp' )
+
 	print 'push mysql to local sql'
-	run( 'mysql -u {0} -p{1} {2} < /tmp/getsqldump/{3}.sql'.format(dest_user, dest_password, dest_dbname, source_dbname) )
+	local( 'mysql -u {0} -p{1} {2} < /tmp/{3}.sql'.format(dest_user, dest_password, dest_dbname, source_dbname) )
 
 

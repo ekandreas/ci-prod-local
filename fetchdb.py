@@ -13,7 +13,7 @@ def fetchdb( account, sqlhost, sqluser, sqlpassword, sql2user, sql2password ):
 	print 'set the connection'
 	env.use_ssh_config = True
 	env.user 	= '{0}'.format(account)
-	env.host_string = '{0}'.format(sql)
+	env.host_string = '{0}'.format(sqlhost)
 
 	print 'dump mysql to local tmp'
 	run( 'mkdir -p /tmp/getsqldump' )

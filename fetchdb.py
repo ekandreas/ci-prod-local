@@ -4,16 +4,7 @@ __author__ = 'Andreas Ek, Flowcom AB'
 from fabric.api import *
 
 # connect to sql, make a dump and get it
-def fetchdb(private_key_path,
-						server_host,
-						server_account,
-						server_password,
-						source_dbname,
-						source_user,
-						source_password,
-						dest_dbname,
-						dest_user,
-						dest_password):
+def fetchdb(private_key_path,	server_host, server_account, server_password,	source_dbname, source_user,	source_password, dest_dbname,	dest_user, dest_password):
 
 	# expects environment variables as parameters from Jenkins
 

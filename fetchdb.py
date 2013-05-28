@@ -28,6 +28,6 @@ def fetchdb( private_key_path, server_host, server_account, server_password, sou
 	get( '/tmp/{0}.sql'.format(source_dbname), '/tmp' )
 
 	print 'push mysql to local sql'
-	local( 'mysql -u {0} -p{1} {2} < /tmp/{3}.sql'.format(dest_user, dest_password, dest_dbname, source_dbname) )
+	local( '/Applications/MAMP/Library/bin/mysql -u {0} -p{1} {2} < /tmp/{3}.sql'.format(dest_user, dest_password, dest_dbname, source_dbname) )
 
 

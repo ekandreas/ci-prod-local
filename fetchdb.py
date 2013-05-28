@@ -5,7 +5,7 @@ __author__ = 'Andreas Ek'
 from fabric.api import *
 
 # connect to sql, make a dump and get it
-def fetchdb( private_key_path, server_account, source_host, source_dbname, source_user, source_password, dest_dbname, dest_user, dest_password ):
+def fetchdb( private_key_path, server_account, server_password, source_host, source_dbname, source_user, source_password, dest_dbname, dest_user, dest_password ):
 
 	print 'Connect to the SQL and create a dump and transfer it to my computer'
 	print '=============================================================================='
@@ -13,7 +13,8 @@ def fetchdb( private_key_path, server_account, source_host, source_dbname, sourc
 	print 'set the connection'
 	env.key_filename = '{0}'.format(private_key_path)
 	env.use_ssh_config = True
-	env.user 	= '{0}'.format(source_account)
+	env.user 	= '{0}'.format(server_account)
+	env.password 	= '{0}'.format(server_password)
 	env.host_string = '{0}'.format(source_host)
 
 	print 'dump mysql to local tmp'

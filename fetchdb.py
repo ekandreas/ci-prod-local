@@ -5,7 +5,7 @@ __author__ = 'Andreas Ek'
 from fabric.api import *
 
 # connect to sql, make a dump and get it
-def fetchdb( private_key_path, server_account, server_password, source_host, source_dbname, source_user, source_password, dest_dbname, dest_user, dest_password ):
+def fetchdb( private_key_path, server_host, server_account, server_password, source_dbname, source_user, source_password, dest_dbname, dest_user, dest_password ):
 
 	print 'Connect to the SQL and create a dump and transfer it to my computer'
 	print '=============================================================================='

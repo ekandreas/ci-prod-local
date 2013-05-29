@@ -38,22 +38,19 @@ def fetchdb():
 	print 'transfer dump to localhost'
 	get('/tmp/{0}.sql'.format(os.environ["source_dbname"]), '/tmp/fetchdb')
 
-	# now go back to local
-	env.host = 'localhost'
-
 	# push mysql to local sql
 	print 'restore to local mysql'
-	run('/Applications/MAMP/Library/bin/mysql -u {0} -p{1} {2} < /tmp/fetchdb/{3}.sql'.format(os.environ["destination_user"],
+	local('/Applications/MAMP/Library/bin/mysql -u {0} -p{1} {2} < /tmp/fetchdb/{3}.sql'.format(os.environ["destination_user"],
 																																											os.environ["destination_password"],
 																																											os.environ["destination_dbname"],
 																																											os.environ["source_dbname"]))
 
 	# search and replace the site name
 	print 'search and replace in database'
-	with cd('/tmp/fetchdb'):
-		run( 'wget https://raw.github.com/interconnectit/Search-Replace-DB/master/searchreplacedb2cli.php' )
-  	run( 'wget https://raw.github.com/interconnectit/Search-Replace-DB/master/searchreplacedb2.php' )
-  	run( 'php /tmp/fetchdb/searchreplacedb2cli.php -h localhost -u {1} -p {2} -d {3} -c utf\-8 -s "{4}" -r "{5}"'.format(os.environ["destination_user"],
+	local('cd /tmp/fetchdb'):
+	local( 'wget https://raw.github.com/interconnectit/Search-Replace-DB/master/searchreplacedb2cli.php' )
+  local( 'wget https://raw.github.com/interconnectit/Search-Replace-DB/master/searchreplacedb2.php' )
+  local( 'php /tmp/fetchdb/searchreplacedb2cli.php -h localhost -u {1} -p {2} -d {3} -c utf\-8 -s "{4}" -r "{5}"'.format(os.environ["destination_user"],
   																																																					os.environ["destination_password"],
   																																																					os.environ["destination_dbname"],
   																																																					os.environ["source_url"],

@@ -6,4 +6,5 @@ import os
 
 # connect to sql, make a dump and get it
 def printall():
-	print os.environ["ANOTHERPARAMETER"]
+    print
+    os.environ["ANOTHERPARAMETER"]

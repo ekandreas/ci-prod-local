@@ -14,6 +14,7 @@ def fetchdb():
 	# connect to the SQL and create a dump and transfer it to my computer
 
 	# set the connection
+	print 'connecting to mysql server
 	env.key_filename = os.environ["private_key_path"]
 	env.use_ssh_config = True
 	env.user = os.environ["server_account"]
@@ -25,6 +26,7 @@ def fetchdb():
 	env.host_string = os.environ["server_host"]
 
 	# dump mysql to local tmp
+	print 'dumping sql to file'
 	run('mysqldump --user={0} --password={1} {2} > /tmp/{2}.sql'.format(os.environ["source_user"],
 																																			os.environ["source_password"],
 																																			os.environ["source_dbname"]))
@@ -33,18 +35,21 @@ def fetchdb():
 	local('mkdir -p /tmp/fetchdb')
 
 	# get the mysql dump file to local tmp
+	print 'transfer dump to localhost
 	get('/tmp/{0}.sql'.format(os.environ["source_dbname"]), '/tmp/fetchdb')
 
 	# now go back to local
 	env.host = 'localhost'
 
 	# push mysql to local sql
-	runl('/Applications/MAMP/Library/bin/mysql -u {0} -p{1} {2} < /tmp/fetchdb/{3}.sql'.format(os.environ["destination_user"],
+	print 'restore to local mysql'
+	run('/Applications/MAMP/Library/bin/mysql -u {0} -p{1} {2} < /tmp/fetchdb/{3}.sql'.format(os.environ["destination_user"],
 																																											os.environ["destination_password"],
 																																											os.environ["destination_dbname"],
 																																											os.environ["source_dbname"]))
 
 	# search and replace the site name
+	print 'search and replace in database'
 	with cd('/tmp/fetchdb'):
 		run( 'wget https://raw.github.com/interconnectit/Search-Replace-DB/master/searchreplacedb2cli.php' )
   	run( 'wget https://raw.github.com/interconnectit/Search-Replace-DB/master/searchreplacedb2.php' )

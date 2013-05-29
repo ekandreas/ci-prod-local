@@ -43,7 +43,7 @@ def fetchdb():
 
     # search and replace the site name
     local(
-        'php searchreplacedb2cli.php -h localhost -u {0} -p {1} -d {2} -c utf\-8 -s "{3}" -r "{4}" > dev/null'.format(
+        'php searchreplacedb2cli.php -h localhost -u {0} -p {1} -d {2} -c utf\-8 -s "{3}" -r "{4}"'.format(
             os.environ["destination_user"],
             os.environ["destination_password"],
             os.environ["destination_dbname"],

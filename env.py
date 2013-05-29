@@ -4,5 +4,5 @@ __author__ = 'Andreas Ek, Flowcom AB'
 from fabric.api import *
 
 # connect to sql, make a dump and get it
-def getall():
+def printall():
 	print env

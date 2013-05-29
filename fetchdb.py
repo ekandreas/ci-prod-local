@@ -14,7 +14,7 @@ def fetchdb():
 	# connect to the SQL and create a dump and transfer it to my computer
 
 	# set the connection
-	print 'connecting to mysql server
+	print 'connecting to mysql server'
 	env.key_filename = os.environ["private_key_path"]
 	env.use_ssh_config = True
 	env.user = os.environ["server_account"]
@@ -35,7 +35,7 @@ def fetchdb():
 	local('mkdir -p /tmp/fetchdb')
 
 	# get the mysql dump file to local tmp
-	print 'transfer dump to localhost
+	print 'transfer dump to localhost'
 	get('/tmp/{0}.sql'.format(os.environ["source_dbname"]), '/tmp/fetchdb')
 
 	# now go back to local

@@ -24,13 +24,11 @@ def fetchwww():
     env.host_string = os.environ["server_host"]
 
     # zip wp-content
-    run('zip -rq /tmp/fetchwww.zip {0}/wp-content/.'.format(os.environ["source_path"]))
+    run('zip -jrq /tmp/fetchwww.zip {0}/wp-content/.'.format(os.environ["source_path"]))
 
     # get wp-content
     get('/tmp/fetchwww.zip', '/tmp')
 
     # unzip wp-content
-    local('unzip -po /tmp/fetchwww.zip -d /tmp')
+    local('unzip -po /tmp/fetchwww.zip -d /tmp/test')
 
-    # copy files to destination
-    local('sudo cp -R /tmp{0}/. {1}/wp-content/.'.format(os.environ["source_path"],os.environ["destination_path"]))

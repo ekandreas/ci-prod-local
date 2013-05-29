@@ -30,4 +30,7 @@ def fetchwww():
     get('/tmp/fetchwww.zip', '/tmp')
 
     # unzip wp-content
-    local('unzip /tmp/fetchwww.zip -qo -d {0}'.format(os.environ["destination_path"]))
+    local('unzip -po /tmp/fetchwww.zip -d /tmp')
+
+    # copy files to destination
+    local('cp -R /tmp{0} {1}'.format(os.environ["source_path"],os.environ["destination_path"]))

@@ -5,4 +5,4 @@ from fabric.api import *
 
 # connect to sql, make a dump and get it
 def printall():
-	print env
+	print env.shell_env

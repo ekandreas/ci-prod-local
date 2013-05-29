@@ -3,34 +3,37 @@ __author__ = 'Andreas Ek, Flowcom AB'
 # import the fabric lib into this script
 from fabric.api import *
 
+# to get all environment parameters from Jenkins, use os.environ:
+import os
+
 # connect to sql, make a dump and get it
-def fetchdb(private_key_path,	server_host, server_account, server_password,	source_dbname, source_user,	source_password, dest_dbname,	dest_user, dest_password):
+def fetchdb():
 
 	# expects environment variables as parameters from Jenkins
 
 	# connect to the SQL and create a dump and transfer it to my computer
 
 	# set the connection
-	env.key_filename = private_key_path
+	env.key_filename = os.environ["private_key_path"]
 	env.use_ssh_config = True
-	env.user = server_account
+	env.user = os.environ["server_account"]
 
-	if server_password:
-		env.password = server_password
+	if os.environ["server_password"]:
+		env.password = os.environ["server_password"]
 
 	# change host now!
-	env.host_string = server_host
+	env.host_string = os.environ["server_host"]
 
 	# dump mysql to local tmp
-	run('mysqldump --user={0} --password={1} {2} > /tmp/{2}.sql'.format(source_user,
-																																			source_password,
-																																			source_dbname))
+	run('mysqldump --user={0} --password={1} {2} > /tmp/{2}.sql'.format(os.environ["source_user"],
+																																			os.environ["source_password"],
+																																			os.environ["source_dbname"]))
 
 	# get the mysql dump file to local tmp
-	get('/tmp/{0}.sql'.format(source_dbname), '/tmp')
+	get('/tmp/{0}.sql'.format(os.environ["source_dbname"]), '/tmp')
 
 	# push mysql to local sql
-	local('/Applications/MAMP/Library/bin/mysql -u {0} -p{1} {2} < /tmp/{3}.sql'.format(dest_user,
-																																											dest_password,
-																																											dest_dbname,
-																																											source_dbname))
+	local('/Applications/MAMP/Library/bin/mysql -u {0} -p{1} {2} < /tmp/{3}.sql'.format(os.environ["dest_user"],
+																																											os.environ["dest_password"],
+																																											os.environ["dest_dbname"],
+																																											os.environ["source_dbname"]))

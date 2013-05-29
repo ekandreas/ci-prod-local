@@ -33,7 +33,7 @@ def fetchdb():
 	get('/tmp/{0}.sql'.format(os.environ["source_dbname"]), '/tmp')
 
 	# push mysql to local sql
-	local('/Applications/MAMP/Library/bin/mysql -u {0} -p{1} {2} < /tmp/{3}.sql'.format(os.environ["dest_user"],
-																																											os.environ["dest_password"],
-																																											os.environ["dest_dbname"],
+	local('/Applications/MAMP/Library/bin/mysql -u {0} -p{1} {2} < /tmp/{3}.sql'.format(os.environ["destination_user"],
+																																											os.environ["destination_password"],
+																																											os.environ["destination_dbname"],
 																																											os.environ["source_dbname"]))

@@ -24,7 +24,7 @@ def fetchwww():
     env.host_string = os.environ["server_host"]
 
     # zip wp-content
-    run('tar -xvf /tmp/fetchwww.tar.gz {0}'.format(os.environ["source_path"]))
+    run('tar -xvf /tmp/fetchwww.tar.gz {0}/*'.format(os.environ["source_path"]))
 
     # get wp-content
     get('/tmp/fetchwww.tar.gz', '/tmp')

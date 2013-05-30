@@ -117,7 +117,9 @@ echo "replace: ".$rplc."\n\n";
 
         // Do we have any tables and if so build the all tables array
         $all_tables = array( );
+
 echo '### changing db to ' . $data;
+echo print_r($connection,true);
         @mysql_select_db( $data, $connection );
         $all_tables_mysql = @mysql_query( 'SHOW TABLES', $connection );
 

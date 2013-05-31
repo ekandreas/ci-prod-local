@@ -24,7 +24,7 @@ def fetchdb():
     env.host_string = os.environ["server_host"]
 
     # dump mysql to local tmp
-    run('mysqldump --user={0} --password={1} {2} > /tmp/{2}.sql'.format(os.environ["source_user"],
+    sudo('mysqldump --user={0} --password={1} {2} > /tmp/{2}.sql'.format(os.environ["source_user"],
                                                                         os.environ["source_password"],
                                                                         os.environ["source_dbname"]))
 

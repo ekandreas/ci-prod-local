@@ -119,9 +119,11 @@ echo "replace: ".$rplc."\n\n";
         $all_tables = array( );
 
 echo '### changing db to ' . $data;
-echo print_r($connection,true);
+
         @mysql_select_db( $data, $connection );
         $all_tables_mysql = @mysql_query( 'SHOW TABLES', $connection );
+
+echo print_r($all_tables_mysql,true);
 
         if ( ! $all_tables_mysql ) {
                 $errors[] = mysql_error( );

@@ -30,5 +30,5 @@ def fetchwww():
     get('/tmp/fetchwww.tar.gz', '/tmp')
 
     # unzip wp-content
-    local('tar -xmf /tmp/fetchwww.tar.gz -C {0}'.format(os.environ["destination_path"]))
+    local('sudo tar -xmf /tmp/fetchwww.tar.gz -C {0}'.format(os.environ["destination_path"]))
 
